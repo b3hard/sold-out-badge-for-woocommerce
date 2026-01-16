@@ -2,11 +2,11 @@
 /**
  * Plugin Name:             Sold Out Badge for WooCommerce
  * Description:             Display a "Sold Out!" badge on out-of-stock products
- * Version:                 4.4.0
- * Requires at least:       5.2
- * Requires PHP:            7.2
+ * Version:                 4.5.0
+ * Requires at least:       5.6
+ * Requires PHP:            7.4
  * WC requires at least:    4.0
- * WC tested up to:         7.7
+ * WC tested up to:         9.5
  * Author:                  Charlie Etienne
  * Author URI:              https://web-nancy.fr
  * License:                 GPL v2 or later
@@ -71,14 +71,20 @@ class WCSOB {
 		add_filter( 'woocommerce_sale_flash', [ WooCommerce::class, 'hide_sale_flash' ], 10, 3 );
 		add_filter( 'woocommerce_get_stock_html', [ WooCommerce::class, 'replace_out_of_stock_text' ], 10, 2 );
 		add_filter( 'woocommerce_locate_template', [ WooCommerce::class, 'locate_template' ], 1, 3 );
+		
+		// Declare HPOS compatibility
+		add_action( 'before_woocommerce_init', [ $this, 'declare_hpos_compatibility' ] );
+	}
+
+	/**
+	 * Declare compatibility with WooCommerce High-Performance Order Storage (HPOS)
+	 */
+	public function declare_hpos_compatibility() {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', WCSOB_PLUGIN_PATH . 'sold-out-badge-for-woocommerce.php', true );
+		}
 	}
 
 }
 
 WCSOB::get_instance()->init();
-
-add_action( 'before_woocommerce_init', function() {
-        if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-                \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
-        }
-} );
