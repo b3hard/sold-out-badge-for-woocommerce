@@ -1,26 +1,24 @@
 === Sold Out Badge for WooCommerce ===
 Contributors: charlieetienne
 Tags: woocommerce, sold out, out of stock, badge, wcsob
-Stable tag: 4.4.0
-Requires at least: 5.2
-Tested up to: 6.2
-Requires PHP: 7.2
+Stable tag: 4.5.0
+Requires at least: 5.6
+Tested up to: 6.7
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate Link: https://paypal.me/webnancy
 
 Display a "Sold Out!" badge on out-of-stock products.
-Show the text and colors you want. Perfect for artists, artisans, real estate professionals...
+Show the text and colors you want.
+Perfect for artists, artisans, real estate professionals...
 
 == Description ==
 
 Display a "Sold Out!" badge on out-of-stock products.
 When a WooCommerce product becomes out of stock, this plugin will show a badge on thumbnail with the text you will have defined.
-
 This plugin was initially created to help people and companies selling *unique* products or services, like artists, artisans, real estate professionals, etc. It is often beneficial for them to keep showing sold out (out of stock) products on their websites, while displaying a message indicating that the product can't be sold anymore.
-
 However, this plugin can be used by **anyone** wanting to display **any text** in a badge when a product is out of stock.
-
 It is also possible to display a badge on backorder products.
 
 == Usage & Documentation ==
@@ -48,7 +46,8 @@ You can customize options in ***Settings > Sold Out Badge for WooCommerce***
 
 1. Install this plugin either via the WordPress.org plugin directory, or by uploading the files to your server.
 2. Activate the plugin.
-3. That's it. You're ready to go! Please, refer to the Usage & Documentation section for examples and how-to information.
+3. That's it. You're ready to go!
+Please, refer to the Usage & Documentation section for examples and how-to information.
 
 == Frequently Asked Questions ==
 
@@ -59,7 +58,8 @@ Yes.
 Sure, go ahead! It is completely open source.
 
 = Can I change the badge text? =
-Yes. Go to *Settings > Sold Out Badge for WooCommerce*, you'll find the setting you want.
+Yes.
+Go to *Settings > Sold Out Badge for WooCommerce*, you'll find the setting you want.
 
 = What if this plugin isn't compatible with my theme or doesn't work? =
 You could uninstall this plugin and try to get the badge manually. There are two ways you could do it:
@@ -92,12 +92,12 @@ You could add a SOLD OUT badge like this:
 
 **2. PHP + CSS**
 
-Otherwise, you could use WP hooks to add a badge. Put this code in your child theme's `functions.php`:
+Otherwise, you could use WP hooks to add a badge.
+Put this code in your child theme's `functions.php`:
 
 ~~~php
 add_action( 'woocommerce_before_shop_loop_item_title', 'my_custom_soldout_badge_display', 10 );
 add_action( 'woocommerce_before_single_product_summary', 'my_custom_soldout_badge_display', 30 );
-
 function my_custom_soldout_badge_display() {
     global $post, $product;
 
@@ -139,6 +139,11 @@ Use the following CSS code to style the badge:
 
 == Changelog ==
 
+= 4.5.0 =
+* Fix: Declare High-Performance Order Storage (HPOS) compatibility
+* Tweak: Update tested versions for WordPress 6.7 and WooCommerce 9.5
+* Dev: Minor code cleanup
+
 = 4.4.0 =
 * Support PHP 8.2
 * Bump Carbon Fields version to 3.6.0
@@ -178,7 +183,8 @@ Use the following CSS code to style the badge:
 * Improves compatibility with Divi Builder on single product pages
 
 = 3.2.0 =
-* Adds an alternative method (pure CSS). Useful for some themes like Divi.
+* Adds an alternative method (pure CSS).
+Useful for some themes like Divi.
 
 = 3.1.0 =
 * Adds badge in search results
@@ -192,4 +198,4 @@ Use the following CSS code to style the badge:
 
 = 2.2.0 =
 * Move to Singleton pattern to let other developpers unhook actions and filters.
-  If you want to unhook something, use it like this, for example: `remove_filter( 'woocommerce_get_stock_html', [ WCSOB::get_instance(), 'replace_out_of_stock_text' ], 10, 2 );`
+If you want to unhook something, use it like this, for example: `remove_filter( 'woocommerce_get_stock_html', [ WCSOB::get_instance(), 'replace_out_of_stock_text' ], 10, 2 );`
